@@ -1,5 +1,3 @@
-streamlit
-openai
 allennlp
 appnope
 argon2-cffi
@@ -177,3 +175,6 @@ webencodings
 widgetsnbextension
 xxhash
 zc.lockfile
+streamlit
+openai
+opennyai
