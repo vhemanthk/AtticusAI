@@ -42,13 +42,22 @@ elif input_Selection=="URL": #When the user enters an URL, extract the text from
 submitButton = st.button("Summarise")
 summarizedText =""
 
-print(inputText)
+#print(inputText)
 if (submitButton):
     if (inputText!=""): #If the text has some content, then send it openNyai Summarizer
         with st.spinner('Wait for it...'):
             summarizedText = openNyaiSummarise (inputText)
             if (summarizedText != None):
-                summarizedTextArea = st.text_area("Summarized Text",summarizedText,height=300)
+                factsText = summarizedText[0]['summary']['facts']
+                argumentsText = summarizedText[0]['summary']['arguments']
+                analysisText = summarizedText[0]['summary']['ANALYSIS']
+                #issueText = summarizedText[0]['summary']['issue']
+                decisionText = summarizedText[0]['summary']['decision']
+                preambleText = summarizedText[0]['summary']['PREAMBLE']
+                textToPrint = f" Summary of the case = \nFacts: \n{factsText} \nArguments: \n{argumentsText} \nAnalysis: \n{analysisText} \nDecision: \n{decisionText} \nPreamble: \n{preambleText}"
+                #print ()
+                summarizedTextArea = st.text_area("Summarized Text",textToPrint,height=300)
+                #summarizedText=summarizedText[0]['summary']
             else:
                 st.error("Summary failed!!")
             st.success('Done!')
